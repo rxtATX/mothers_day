@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const twoDArray = [
   [4, 4, 4, 4],
-  [5, 5, 6],
+  [5, 6, 5],
   [5, 4]
 ]
 

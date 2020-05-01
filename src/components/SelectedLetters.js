@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '1.5em',
     fontSize: '24px',
     fontVariant: 'all-small-caps',
-},
-hidden: {
+  },
+  hidden: {
     textAlign: 'center',
     lineHeight: '1em',
     fontSize: '24px',
@@ -30,20 +30,19 @@ hidden: {
   },
 }));
 
-export default function SelectedLetters ({ word, guessedLetters }) {
-    const classes = useStyles();
-
-    return (
-      <Grid container className={classes.root} spacing={1}>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={1}>
-            {word.split("").map((value, i) => (
-              <Grid key={i} item>
-                <Paper className={guessedLetters[i] === value ? classes.paper : classes.hidden}>{guessedLetters[i] === value ? value : ""}</Paper>
-              </Grid>
-            ))}
-          </Grid>
+export default function SelectedLetters({ word, guessedLetters }) {
+  const classes = useStyles();
+  return (
+    <Grid container className={classes.root} spacing={1}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={1}>
+          {word.split("").map((value, i) => (
+            <Grid key={i} item>
+              <Paper className={guessedLetters[i] === value ? classes.paper : classes.hidden}>{guessedLetters[i] === value ? value : ""}</Paper>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
-    )
+    </Grid>
+  )
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
-import { buildLetterChoices } from '../utility/API';
 const colors = [
   '#e57373',
   '#ba68c8',
@@ -37,14 +36,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function LettersMatrix({ word, letterPress }) {
-  const [letters, setLetters] = useState();
-  const [letterActive, setLetterActive] = useState();
+export default function LettersMatrix({ letterPress, wordGroups, letterOptions }) {
   const classes = useStyles();
-
-  useEffect(() => {
-    setLetters(buildLetterChoices(word))
-  }, [word])
 
   function FormRow({ subLetters, row }) {
     return (
@@ -64,18 +57,19 @@ export default function LettersMatrix({ word, letterPress }) {
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
-        {letters ? <><Grid container item xs={12} spacing={3}>
-          <FormRow row={1} subLetters={letters.slice(0, 4)} />
+        {letterOptions ? <><Grid container item xs={12} spacing={3}>
+          <FormRow row={1} subLetters={wordGroups.length > 2 ? letterOptions.slice(0, 4) : letterOptions.slice(0, 3)} />
         </Grid>
           <Grid container item xs={12} spacing={3}>
-            <FormRow row={2} subLetters={letters.slice(4, 8)} />
+            <FormRow row={2} subLetters={wordGroups.length > 2 ? letterOptions.slice(4, 8) : letterOptions.slice(3, 6)} />
           </Grid>
           <Grid container item xs={12} spacing={3}>
-            <FormRow row={3} subLetters={letters.slice(8, 12)} />
+            <FormRow row={3} subLetters={wordGroups.length > 2 ? letterOptions.slice(8, 12) : letterOptions.slice(6, 9)} />
           </Grid>
-          <Grid container item xs={12} spacing={3}>
-            <FormRow row={4} subLetters={letters.slice(12, 16)} />
-          </Grid></> : null}
+          {wordGroups.length > 2 ? <Grid container item xs={12} spacing={3}>
+            <FormRow row={4} subLetters={letterOptions.slice(12, 16)} />
+          </Grid> : null}
+        </> : null}
       </Grid>
     </div>
   );

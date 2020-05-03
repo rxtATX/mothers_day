@@ -18,7 +18,7 @@ function MainPage() {
 
     useEffect(() => {
         if (wordGroups.length) {
-            dispatchGetWord(wordGroups, dispatch);
+            dispatchGetWord(dispatch);
         }
     }, [wordGroups, dispatch]);
 
@@ -46,7 +46,7 @@ function MainPage() {
         return (
             <>
                 <ConfigClues
-                    dispatchGetWord={() => dispatchGetWord(wordGroups, dispatch)}
+                    dispatchGetWord={() => dispatchGetWord(dispatch)}
                     dispatchGetHint={dispatchGetHint}
                 />
                 <LettersMatrix

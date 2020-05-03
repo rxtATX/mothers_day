@@ -88,7 +88,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
                 <FormRow row={3} subLetters={state.puzzle.puzzle[2]} />
               </Grid>
               {
-                wordGroups.length > 2 ?
+                state.puzzle.puzzle.length > 3 ?
                   <Grid container item justify="center" xs={12} spacing={3}>
                     <FormRow row={4} subLetters={state.puzzle.puzzle[3]} />
                   </Grid>

@@ -67,7 +67,7 @@ export default class PuzzleMaker {
 
 	nextMove() {
 		if (this.checkCoords()) {
-			return
+			throw new Error()
 		}
 
 		let x = this.currentCoords.x + this.moveTypes[Math.floor(Math.random() * this.moveTypes.length)];
@@ -103,7 +103,7 @@ export default class PuzzleMaker {
 
 			}
 		} catch (err) {
-			if (!err) return this.generatePuzzle();
+			if (!err.message) return this.generatePuzzle();
 
 			throw err;
 		}

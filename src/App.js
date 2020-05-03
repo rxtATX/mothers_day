@@ -6,7 +6,7 @@ import './App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '2em 3em'
+    margin: '5em 3em'
   },
 }));
 

@@ -47,7 +47,8 @@ export function getWord(letter, num) {
     return fetch(`https://api.datamuse.com/words?sp=${letter}${q}`)
 }
 
-export function dispatchGetWord(wordGroups, dispatch) {
+export function dispatchGetWord(dispatch) {
+    let wordGroups = findWordGroups();
     Promise.all(wordGroups.map(group => getWord(getLetter(getRandom(26)), group)))
         .then(res => res.map(el => el.json()))
         .then(res => {

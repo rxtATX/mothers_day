@@ -62,7 +62,6 @@ export default function ConfigClues({
   }, [state.hintPreference])
 
   function accept() {
-    console.log("accept")
     dispatchChange()
     dispatchGetHint()
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { useGameplayContext } from '../utility/GlobalState';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,17 +33,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectedLetters({ word, guessedLetters }) {
   const classes = useStyles();
+  const [state] = useGameplayContext();
+
   return (
     <Grid container className={classes.root} spacing={1}>
-      <Grid item xs={12}>
-        <Grid container justify="center" spacing={1}>
-          {word.split("").map((value, i) => (
-            <Grid key={i} item>
-              <Paper className={guessedLetters[i] === value ? classes.paper : classes.hidden}>{guessedLetters[i] === value ? value : ""}</Paper>
-            </Grid>
-          ))}
+      {state.puzzle.words.map((word, index) => (
+        <Grid item xs={12} key={index}>
+          <Grid container justify="center" spacing={1}>
+            {word.split("").map((value, i) => (
+              <Grid key={i} item>
+                <Paper className={guessedLetters[i] === value ? classes.paper : classes.hidden}>{guessedLetters[i] === value ? value : ""}</Paper>
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
-      </Grid>
+      ))}
     </Grid>
   )
 }

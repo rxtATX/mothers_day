@@ -49,7 +49,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogEl({ title, buttonElement, textContent, children, accept, show = false }) {
     const classes = useStyles();
-    const [_, dispatch] = useGameplayContext();
+    const [, dispatch] = useGameplayContext();
     const [open, setOpen] = React.useState(show);
 
     useEffect(() => {

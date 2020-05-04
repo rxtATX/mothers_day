@@ -1,4 +1,3 @@
-import PuzzleMaker from './classGame';
 const alpha = "qwertyuiopasdfghjklzxcvbnm";
 const twoDArray = [
     [4, 4, 4, 4],
@@ -29,10 +28,6 @@ export function findWordGroups() {
     return twoDArray[getRandom(twoDArray.length)]
 }
 
-export function compare(arr1, arr2) {
-    return arr1.toString() === arr2.toString()
-}
-
 export function getRandom(len) {
     return Math.floor(Math.random() * len)
 }
@@ -47,6 +42,18 @@ export function getWord(letter, num) {
     return fetch(`https://api.datamuse.com/words?sp=${letter}${q}`)
 }
 
+function recursiveGetWord(data) {
+    let word = data[getRandom(data.length)].word;
+    if (!validateWord(word)) {
+        recursiveGetWord(data)
+    }
+    else return word
+}
+
+function validateWord(word) {
+    return word.replace(/[^a-zA-Z]/gmi, '') === word
+}
+
 export function dispatchGetWord(dispatch) {
     let wordGroups = findWordGroups();
     Promise.all(wordGroups.map(group => getWord(getLetter(getRandom(26)), group)))
@@ -54,19 +61,19 @@ export function dispatchGetWord(dispatch) {
         .then(res => {
             Promise.all(res)
                 .then(data => {
-                    let first = data[0][getRandom(data[0].length)].word;
-                    let second = data[1][getRandom(data[0].length)].word;
+                    let first = recursiveGetWord(data[0])
+                    let second = recursiveGetWord(data[1])
                     let third, fourth;
                     if (data[2]) {
-                        third = data[0][getRandom(data[0].length)].word;
+                        third = recursiveGetWord(data[2])
                     }
                     if (data[3]) {
-                        fourth = data[0][getRandom(data[0].length)].word;
+                        fourth = recursiveGetWord(data[3])
                     }
                     let arr = [first, second, third, fourth].filter(el => el)
                     dispatch({
                         type: 'SET_PUZZLE_CONSTRUCTOR',
-                        payload: new PuzzleMaker(arr)
+                        payload: arr
                     })
                 })
         })

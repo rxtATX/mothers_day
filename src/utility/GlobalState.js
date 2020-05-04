@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react";
 import * as actions from './actions';
+import PuzzleMaker from "./classGame";
 
 const defaultState = {
     hintPreference: false,
@@ -18,11 +19,17 @@ const { Provider } = GameplayContext;
 function reducer(state = defaultState, action) {
     switch (action.type) {
         case actions.SET_PUZZLE_CONSTRUCTOR:
-            action.payload.generatePuzzle();
+            let puzzle = new PuzzleMaker(action.payload);
+            try {
+                puzzle.generatePuzzle();
+            } catch (err) {
+                puzzle = new PuzzleMaker(action.payload);
+                puzzle.generatePuzzle();
+            }
             return {
                 ...state,
                 ...defaultState,
-                puzzle: action.payload,
+                puzzle,
             }
         case 'SET_HINT_PREFERENCE':
             return {

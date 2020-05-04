@@ -3,7 +3,7 @@ import LettersMatrix from './LettersMatrix';
 import ConfigClues from './ConfigClues';
 import GuessDisplay from './GuessDisplay';
 import SelectedLetters from './SelectedLetters';
-import { findWordGroups, dispatchGetWord, compare } from '../utility/API';
+import { findWordGroups, dispatchGetWord } from '../utility/API';
 import { useGameplayContext } from '../utility/GlobalState';
 import Dialog from './UI/Dialog'
 
@@ -11,7 +11,7 @@ function MainPage() {
 
     const [wordGroups, setWordGroups] = useState([]);
     const [state, dispatch] = useGameplayContext();
-    const [lineCoords, setLineCoords] = useState([]);
+    // const [lineCoords, setLineCoords] = useState([]);
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function MainPage() {
             for (let word in state.puzzle.wordPath) {
                 if (!correctMap[word]) {
                     correctMap[word] = []
-                    for (let letter in word) {
+                    for (let i = 0; i < word.length; i++) {
                         correctMap[word].push(false)
                     }
                 }
@@ -79,7 +79,7 @@ function MainPage() {
                 payload: correctMap
             })
         }
-    }, [state.currentGuess, state.puzzle]);
+    }, [state.currentGuess, state.puzzle, dispatch, state.finalizedWords]);
 
     useEffect(() => {
         if (state.puzzle) {

@@ -79,35 +79,12 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
       )
     }
 
-    function determineRender() {
-      return subLetters.map((letter, i) => {
-        if (Object.keys(state.finalizedWords).join("").includes(letter)) {
-          for (let key in state.finalizedWords) {
-            state.puzzle.wordPath[key].map(coord => {
-              if (coord.x === row - 1 && coord.y === i) {
-                // setShow(false)
-                return <Button key={i} i={i} letter={null} />
-              }
-            })
-          }
-        } else if (state.currentGuess.length) {
-          state.currentGuess.forEach(guessObj => {
-            if (guessObj.y === i && guessObj.x === row - 1) {
-              // setShow(false)
-              return <Button key={i} i={i} letter={null} />
-            }
-          })
-        } else {
-          {/* setShow(true) */ }
-          return <Button key={i} i={i} letter={letter} />
-        }
-      })
-    }
-
     return (
       <React.Fragment>
         <Grid item>
-          {determineRender()}
+          {subLetters.map((letter, i) => (
+            <Button letter={letter} key={i} i={i} />
+          ))}
         </Grid>
       </React.Fragment>
     );

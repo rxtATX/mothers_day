@@ -70,13 +70,11 @@ export default function SelectedLetters() {
   return (
     <Grid container className={classes.root} spacing={state.puzzle.words.length === 4 ? 2 : 1}>
       {state.puzzle.words.map((word, index) => (
-        <>
-          <Grid item xs={state.puzzle.words.length === 4 ? 6 : 12} key={index}>
-            <Grid className={(index === 0 || index === 2) && state.puzzle.words.length === 4 ? classes.end : (index === 1 || index === 3) && state.puzzle.words.length === 4 ? classes.start : classes.center} container spacing={1}>
-              {determineRender(word)}
-            </Grid>
+        <Grid item xs={state.puzzle.words.length === 4 ? 6 : 12} key={index}>
+          <Grid className={(index === 0 || index === 2) && state.puzzle.words.length === 4 ? classes.end : (index === 1 || index === 3) && state.puzzle.words.length === 4 ? classes.start : classes.center} container spacing={1}>
+            {determineRender(word)}
           </Grid>
-        </>
+        </Grid>
       ))}
     </Grid>
   )

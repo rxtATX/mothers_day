@@ -105,7 +105,7 @@ export default class PuzzleMaker {
 		} catch (err) {
 			if (!err.message) return this.generatePuzzle();
 
-			throw err;
+			throw err
 		}
 	}
 

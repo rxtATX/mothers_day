@@ -29,6 +29,18 @@ const useStyles = makeStyles((theme) => ({
   control: {
     padding: theme.spacing(2),
   },
+  start: {
+    justifyContent: 'flex-start',
+    marginLeft: '.25em',
+    paddingLeft: 0,
+  },
+  end: {
+    justifyContent: 'flex-end',
+    marginRight: '1em'
+  },
+  center: {
+    justifyContent: 'center'
+  }
 }));
 
 export default function SelectedLetters() {
@@ -56,13 +68,15 @@ export default function SelectedLetters() {
   }
 
   return (
-    <Grid container className={classes.root} spacing={1}>
+    <Grid container className={classes.root} spacing={state.puzzle.words.length === 4 ? 2 : 1}>
       {state.puzzle.words.map((word, index) => (
-        <Grid item xs={state.puzzle.words.length === 4 ? 6 : 12} key={index}>
-          <Grid container justify="center" spacing={1}>
-            {determineRender(word)}
+        <>
+          <Grid item xs={state.puzzle.words.length === 4 ? 6 : 12} key={index}>
+            <Grid className={(index === 0 || index === 2) && state.puzzle.words.length === 4 ? classes.end : (index === 1 || index === 3) && state.puzzle.words.length === 4 ? classes.start : classes.center} container spacing={1}>
+              {determineRender(word)}
+            </Grid>
           </Grid>
-        </Grid>
+        </>
       ))}
     </Grid>
   )

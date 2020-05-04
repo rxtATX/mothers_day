@@ -83,9 +83,7 @@ function MainPage() {
 
     useEffect(() => {
         if (state.puzzle) {
-
             if (Object.keys(state.finalizedWords).length === state.puzzle.words.length) {
-                console.log("Game win!")
                 setShow(true)
             }
         }
@@ -136,7 +134,9 @@ function MainPage() {
                 />
                 <SelectedLetters />
                 <Dialog
+                    title="Congratulations!"
                     show={show}
+                    buttonElement={<></>}
                     textContent={"Game Win!!"}
                 />
             </>);

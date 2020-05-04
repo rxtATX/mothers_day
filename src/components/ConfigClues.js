@@ -89,6 +89,7 @@ export default function ConfigClues({
         </Grid>
       </Grid>
       {!state.hintPreference ? <Dialog
+        title="Too hard?"
         accept={accept}
         textContent="Would you like a hint?"
         buttonElement={<ButtonElement dispatchGetHint={dispatchGetHint}

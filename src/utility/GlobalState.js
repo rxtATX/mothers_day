@@ -21,6 +21,7 @@ function reducer(state = defaultState, action) {
             action.payload.generatePuzzle();
             return {
                 ...state,
+                ...defaultState,
                 puzzle: action.payload,
             }
         case 'SET_HINT_PREFERENCE':

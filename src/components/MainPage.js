@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import LettersMatrix from './LettersMatrix';
 import ConfigClues from './ConfigClues';
+import GuessDisplay from './GuessDisplay';
 import SelectedLetters from './SelectedLetters';
 import { findWordGroups, dispatchGetWord, compare } from '../utility/API';
 import { useGameplayContext } from '../utility/GlobalState';
+import Dialog from './UI/Dialog'
 
 function MainPage() {
+
     const [wordGroups, setWordGroups] = useState([]);
-    const [guessedLetters, setGuessedLetters] = useState([]);
-    const [tempAnswers, setTempAnswers] = useState([]);
     const [state, dispatch] = useGameplayContext();
+    const [lineCoords, setLineCoords] = useState([]);
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         const randWordgroups = findWordGroups();
@@ -22,24 +25,95 @@ function MainPage() {
         }
     }, [wordGroups, dispatch]);
 
-    function dispatchGetHint() {
-        console.log("display a correct letter now")
-    }
-
-    function letterPress(letter, row, i) {
-        let x = row - 1;
-        let y = i;
-        let newTemp = [...tempAnswers, { x, y }]
-        setTempAnswers(newTemp)
-        for (let key in state.puzzle.wordPath) {
-            for (let j = 0; j < newTemp.length; j++) {
-                if (JSON.stringify(newTemp[j]) === JSON.stringify(state.puzzle.wordPath[key][j])) {
-                    if (compare(newTemp, state.puzzle.wordPath[key])) {
-                        console.log("finished word", key)
+    useEffect(() => {
+        let correctMap = {}
+        if (state.puzzle) {
+            for (let word in state.puzzle.wordPath) {
+                if (!correctMap[word]) {
+                    correctMap[word] = []
+                    for (let letter in word) {
+                        correctMap[word].push(false)
+                    }
+                }
+                for (let i = 0; i < state.currentGuess.length; i++) {
+                    if (JSON.stringify(state.currentGuess[i]) === JSON.stringify(state.puzzle.wordPath[word][i])) {
+                        correctMap[word][i] = state.puzzle.wordPath[word][i]
+                    } else {
+                        correctMap[word][i] = false
                     }
                 }
             }
+
+            let skippedArr = []
+            for (let word in correctMap) {
+                if (correctMap[word].filter(el => el).length === word.length) {
+                    dispatch({
+                        type: 'FINALIZE_WORD',
+                        payload: word
+                    })
+                    dispatch({
+                        type: 'RESET_GUESSES'
+                    })
+                }
+                if (!correctMap[word][state.currentGuess.length - 1]) {
+                    skippedArr.push(word)
+                }
+                if (state.finalizedWords[word]) {
+                    correctMap[word] = state.puzzle.wordPath[word]
+                }
+            }
+            if (skippedArr.length === state.puzzle.words.length && state.currentGuess.length) {
+                dispatch({
+                    type: 'RESET_GUESSES'
+                })
+            }
+
+            dispatch({
+                type: 'CORRECT_MAP',
+                payload: correctMap
+            })
         }
+    }, [state.currentGuess, state.puzzle]);
+
+    useEffect(() => {
+        if (state.puzzle) {
+
+            if (Object.keys(state.finalizedWords).length === state.puzzle.words.length) {
+                console.log("Game win!")
+                setShow(true)
+            }
+        }
+    }, [state.finalizedWords, state.puzzle])
+
+    function dispatchGetHint() {
+        let arr = []
+        for (let key in state.correctMap) {
+            arr.push(state.correctMap[key])
+        }
+        let rowI = Math.floor(Math.random() * arr.length)
+        let row = arr[rowI];
+        console.log(row)
+        let iI = Math.floor(Math.random() * row.length)
+        let i = row[iI];
+        console.log(i)
+        if (!i) {
+            letterPress(null, null, row + 1, i)
+        } else dispatchGetHint()
+    }
+
+    function letterPress(row, i) {
+        // let { top, left, width, height } = e.target.getBoundingClientRect()
+        // setLineCoords([...lineCoords, { x: top - (height / 2), y: left - (width / 2) }])
+
+        let x = row - 1;
+        let y = i;
+
+        dispatch({
+            type: 'LETTER_PRESS',
+            payload: {
+                x, y
+            }
+        })
     }
 
     if (state.puzzle) {
@@ -49,12 +123,15 @@ function MainPage() {
                     dispatchGetWord={() => dispatchGetWord(dispatch)}
                     dispatchGetHint={dispatchGetHint}
                 />
+                <GuessDisplay />
                 <LettersMatrix
                     letterPress={letterPress}
                     wordGroups={wordGroups}
                 />
-                <SelectedLetters
-                    guessedLetters={guessedLetters}
+                <SelectedLetters />
+                <Dialog
+                    show={show}
+                    textContent={"Game Win!!"}
                 />
             </>);
     } else {

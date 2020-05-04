@@ -11,8 +11,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DialogEl({ buttonElement, textContent, children, accept }) {
-    const [open, setOpen] = React.useState(false);
+export default function DialogEl({ buttonElement, textContent, children, accept, show = false }) {
+    const [open, setOpen] = React.useState(show);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,7 +24,7 @@ export default function DialogEl({ buttonElement, textContent, children, accept 
 
     return (
         <div>
-            {React.cloneElement(buttonElement, { onClick: handleClickOpen })}
+            {buttonElement ? React.cloneElement(buttonElement, { onClick: handleClickOpen }) : null}
             <Dialog
                 open={open}
                 TransitionComponent={Transition}

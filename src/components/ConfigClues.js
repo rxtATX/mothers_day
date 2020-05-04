@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => {
   return {
     root: {
       flexGrow: 1,
-      margin: '2em 3em'
+      margin: '2em 3em 1em'
     },
     button: {
       borderRadius: '10px',
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => {
       textShadow: '0px 1px 2px black',
       fontSize: '1.25em',
       fontWeight: '700',
+      padding: '.5em 2em'
     },
     paper: {
       padding: theme.spacing(2),

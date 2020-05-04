@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
@@ -18,13 +18,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     width: '50px',
     height: '50px',
-    margin: '2.5px',
+    margin: '10px',
+    transform: 'scale(1.25)'
   },
   hidden: {
     padding: theme.spacing(1),
     width: '50px',
     height: '50px',
-    margin: '2.5px',
+    margin: '10px',
+    transform: 'scale(1.25)',
     visibility: 'hidden'
   },
   activated: {
@@ -42,18 +44,35 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
       const [show, setShow] = useState(true);
       const { light, base, dark } = colors[(i + 1) * row];
 
-      function conceal(i) {
-        console.log("hide", row, i)
-        setShow(false)
+      useEffect(() => {
+        if (Object.keys(state.finalizedWords).join("").includes(letter)) {
+          for (let key in state.finalizedWords) {
+            state.puzzle.wordPath[key].map(coord => {
+              if (coord.x === row - 1 && coord.y === i) {
+                setShow(false)
+              }
+            })
+          }
+        } else if (state.currentGuess.length) {
+          state.currentGuess.forEach(guessObj => {
+            if (guessObj.y === i && guessObj.x === row - 1) {
+              setShow(false)
+            }
+          })
+        } else {
+          setShow(true)
+        }
+      }, [state.currentGuess, state.finalizedWords])
+
+      function conceal(e) {
+        e.persist()
+        letterPress(row, i)
       }
 
       return (
         <Fab
           style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
-          onClick={() => {
-            conceal(i)
-            letterPress(letter, row, i)
-          }}
+          onClick={conceal}
           className={show ? classes.fab : classes.hidden}>
           {letter}
         </Fab>

@@ -2,7 +2,10 @@ import React, { createContext, useReducer, useContext } from "react";
 import * as actions from './actions';
 
 const defaultState = {
-    hintPreference: false
+    hintPreference: false,
+    currentGuess: [],
+    finalizedWords: {},
+    correctMap: {}
 }
 
 const GameplayContext = createContext({
@@ -24,6 +27,37 @@ function reducer(state = defaultState, action) {
             return {
                 ...state,
                 hintPreference: action.payload
+            }
+        case "LETTER_PRESS":
+            return {
+                ...state,
+                currentGuess: [
+                    ...state.currentGuess,
+                    action.payload
+                ]
+            }
+        case "RESET_GUESSES":
+            return {
+                ...state,
+                currentGuess: []
+            }
+        case 'FINALIZE_WORD':
+            return {
+                ...state,
+                finalizedWords: {
+                    ...state.finalizedWords,
+                    [action.payload]: true
+                }
+            }
+        case 'GET_HINT':
+            return {
+                ...state,
+                hintLetters: []
+            }
+        case 'CORRECT_MAP':
+            return {
+                ...state,
+                correctMap: action.payload
             }
         default:
             return state;

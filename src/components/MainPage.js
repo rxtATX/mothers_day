@@ -37,7 +37,13 @@ function MainPage() {
                 }
                 for (let i = 0; i < state.currentGuess.length; i++) {
                     if (JSON.stringify(state.currentGuess[i]) === JSON.stringify(state.puzzle.wordPath[word][i])) {
-                        correctMap[word][i] = state.puzzle.wordPath[word][i]
+                        if (state.currentGuess.length > 1) {
+                            if (correctMap[word][i - 1] === state.puzzle.wordPath[word][i - 1]) {
+                                correctMap[word][i] = state.puzzle.wordPath[word][i]
+                            }
+                        } else {
+                            correctMap[word][i] = state.puzzle.wordPath[word][i]
+                        }
                     } else {
                         correctMap[word][i] = false
                     }

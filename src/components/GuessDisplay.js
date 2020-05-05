@@ -1,20 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
-// import { colors } from '../utility/API';
-// import { useGameplayContext } from '../utility/GlobalState'
+import { colors } from '../utility/API';
+import { useGameplayContext } from '../utility/GlobalState'
 
 const useStyles = makeStyles((theme) => ({
-    // fab: {
-    //     textAlign: 'center',
-    //     color: 'white',
-    //     textShadow: '0px 1px 2px black',
-    //     fontSize: '1em',
-    //     fontWeight: '600',
-    //     margin: '1.5px',
-    //     transform: 'scale(.85)'
-    // },
+    fab: {
+        textAlign: 'center',
+        color: 'white',
+        textShadow: '0px 1px 2px black',
+        fontSize: '1em',
+        fontWeight: '600',
+        margin: '1.5px',
+        transform: 'scale(.85)'
+    },
     root: {
         minHeight: '2.75em',
         marginBottom: '1.5em',
@@ -24,15 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 function GuessDisplay() {
     const classes = useStyles();
-    // const [state] = useGameplayContext();
+    const [state] = useGameplayContext();
 
-    // function getColor(x, y) {
-    //     return colors[(x + 1) * y];
-    // }
+    function getColor(x, y) {
+        return colors[(x + 1) * y];
+    }
 
     return (
         <Grid className={classes.root} container justify="center">
-            {/* {state.currentGuess.map(guess =>
+            {state.currentGuess.map(guess =>
                 <Grid item>
                     <Fab
                         size="small"
@@ -48,7 +48,7 @@ function GuessDisplay() {
                         className={classes.fab}>
                         {state.puzzle.puzzle[guess.x][guess.y]}
                     </Fab>
-                </Grid>)} */}
+                </Grid>)}
         </Grid>
     )
 }

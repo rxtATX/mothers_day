@@ -90,19 +90,13 @@ function MainPage() {
     }, [state.finalizedWords, state.puzzle])
 
     function dispatchGetHint() {
-        let arr = []
         for (let key in state.correctMap) {
-            arr.push(state.correctMap[key])
+            if (state.correctMap[key].filter(el => !el).length > 0) {
+                let openIndex = state.correctMap[key].indexOf(false);
+                let { x, y } = state.puzzle.wordPath[key][openIndex]
+                return letterPress(x + 1, y)
+            }
         }
-        let rowI = Math.floor(Math.random() * arr.length)
-        let row = arr[rowI];
-        console.log(row)
-        let iI = Math.floor(Math.random() * row.length)
-        let i = row[iI];
-        console.log(i)
-        if (!i) {
-            letterPress(null, null, row + 1, i)
-        } else dispatchGetHint()
     }
 
     function letterPress(row, i) {

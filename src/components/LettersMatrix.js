@@ -41,20 +41,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
   function FormRow({ subLetters, row }) {
 
     function Button({ letter, i }) {
-      const [show, setShow] = useState(true);
       const { light, base, dark } = colors[(i + 1) * row] || colors[0];
-
-      useEffect(() => {
-        if (state.currentGuess.length) {
-          state.currentGuess.forEach(guessObj => {
-            if (guessObj.y === i && guessObj.x === row - 1) {
-              setShow(false)
-            }
-          })
-        } else {
-          setShow(true)
-        }
-      }, [i])
 
       function conceal(e) {
         e.persist()
@@ -66,7 +53,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
           {letter ? <Fab
             style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
             onClick={conceal}
-            className={show ? classes.fab : classes.hidden}>
+            className={classes.fab}>
             {letter}
           </Fab> : <Fab
             className={classes.hidden}>

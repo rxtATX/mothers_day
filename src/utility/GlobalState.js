@@ -51,9 +51,7 @@ function reducer(state = defaultState, action) {
             }
         case 'FINALIZE_WORD':
             let finalizedWordPath = state.puzzle.wordPath[action.payload]
-            console.log(finalizedWordPath)
             finalizedWordPath.forEach(coord => {
-                console.log(coord)
                 state.puzzle.puzzle[coord.x][coord.y] = false
             })
             return {

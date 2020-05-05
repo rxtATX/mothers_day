@@ -114,6 +114,10 @@ function MainPage() {
         })
     }
 
+    function outsideClose() {
+        setShow(false)
+    }
+
     if (state.puzzle) {
         return (
             <>
@@ -127,12 +131,13 @@ function MainPage() {
                     wordGroups={wordGroups}
                 />
                 <SelectedLetters />
-                <Dialog
+                {show ? <Dialog
                     title="Congratulations!"
                     show={show}
+                    outsideClose={outsideClose}
                     buttonElement={<></>}
                     textContent={"Game Win!!"}
-                />
+                /> : null}
             </>);
     } else {
         return "Loading..."

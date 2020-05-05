@@ -47,7 +47,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DialogEl({ title, buttonElement, textContent, children, accept, show = false }) {
+export default function DialogEl({ title, buttonElement, textContent, children, accept, show = false, outsideClose = () => null }) {
     const classes = useStyles();
     const [, dispatch] = useGameplayContext();
     const [open, setOpen] = React.useState(show);
@@ -62,6 +62,7 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
 
     const handleClose = () => {
         setOpen(false);
+        outsideClose();
     };
 
     return (

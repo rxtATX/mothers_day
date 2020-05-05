@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     fontVariant: 'all-small-caps',
     height: 45,
     width: 24,
-    background: "#999"
+    background: "#ebfbff"
   },
   control: {
     padding: theme.spacing(2),

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
   activated: {
     backgroundColor: theme.palette.secondary
+  },
+  animate: {
+    visibility: 'hidden'
+    // animationName: 'emphasize',
+    // animationDuration: '8s',
+    // animationTimingFunction: 'ease',
+    // animationIterationCount: 'infinite',
+    // boxShadow: '1px 1px 1px rgba(0, 0, 0, .3)',
   }
 }));
 
@@ -41,6 +49,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
   function FormRow({ subLetters, row }) {
 
     function Button({ letter, i }) {
+      const [animate, setAnimate] = useState(false);
       const { light, base, dark } = colors[(i + 1) * row] || colors[0];
 
       function conceal(e) {
@@ -48,12 +57,20 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
         letterPress(row, i)
       }
 
+      useEffect(() => {
+        state.currentGuess.forEach(coord => {
+          if (coord.x === row - 1 && coord.y === i) {
+            setAnimate(true)
+          }
+        })
+      }, [])
+
       return (
         <>
           {letter ? <Fab
             style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
             onClick={conceal}
-            className={classes.fab}>
+            className={!animate ? classes.fab : `${classes.fab} ${classes.animate}`}>
             {letter}
           </Fab> : <Fab
             className={classes.hidden}>

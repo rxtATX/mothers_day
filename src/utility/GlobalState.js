@@ -20,11 +20,11 @@ function reducer(state = defaultState, action) {
     switch (action.type) {
         case actions.SET_PUZZLE_CONSTRUCTOR:
             let puzzle = new PuzzleMaker(action.payload);
-            try {
-                puzzle.generatePuzzle();
-            } catch (err) {
-                puzzle = new PuzzleMaker(action.payload);
-                puzzle.generatePuzzle();
+            puzzle.generatePuzzle();
+
+            if (puzzle.length % 2 !== 0) {
+                puzzle = new PuzzleMaker(action.payload)
+                puzzle.generatePuzzle()
             }
             return {
                 ...state,
@@ -50,6 +50,12 @@ function reducer(state = defaultState, action) {
                 currentGuess: []
             }
         case 'FINALIZE_WORD':
+            let finalizedWordPath = state.puzzle.wordPath[action.payload]
+            console.log(finalizedWordPath)
+            finalizedWordPath.forEach(coord => {
+                console.log(coord)
+                state.puzzle.puzzle[coord.x][coord.y] = false
+            })
             return {
                 ...state,
                 finalizedWords: {

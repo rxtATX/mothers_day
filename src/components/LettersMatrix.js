@@ -45,15 +45,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
       const { light, base, dark } = colors[(i + 1) * row] || colors[0];
 
       useEffect(() => {
-        if (Object.keys(state.finalizedWords).join("").includes(letter)) {
-          for (let key in state.finalizedWords) {
-            state.puzzle.wordPath[key].map(coord => {
-              if (coord.x === row - 1 && coord.y === i) {
-                setShow(false)
-              }
-            })
-          }
-        } else if (state.currentGuess.length) {
+        if (state.currentGuess.length) {
           state.currentGuess.forEach(guessObj => {
             if (guessObj.y === i && guessObj.x === row - 1) {
               setShow(false)
@@ -62,7 +54,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
         } else {
           setShow(true)
         }
-      }, [state.currentGuess, state.finalizedWords])
+      }, [i])
 
       function conceal(e) {
         e.persist()
@@ -70,12 +62,18 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
       }
 
       return (
-        <Fab
-          style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
-          onClick={conceal}
-          className={show ? classes.fab : classes.hidden}>
-          {letter}
-        </Fab>
+        <>
+          {letter ? <Fab
+            style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
+            onClick={conceal}
+            className={show ? classes.fab : classes.hidden}>
+            {letter}
+          </Fab> : <Fab
+            className={classes.hidden}>
+              {letter}
+            </Fab>
+          }
+        </>
       )
     }
 

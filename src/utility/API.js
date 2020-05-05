@@ -71,10 +71,14 @@ export function dispatchGetWord(dispatch) {
                         fourth = recursiveGetWord(data[3])
                     }
                     let arr = [first, second, third, fourth].filter(el => el)
-                    dispatch({
-                        type: 'SET_PUZZLE_CONSTRUCTOR',
-                        payload: arr
-                    })
+                    if (arr.length === wordGroups.length && arr.join("").length === wordGroups.reduce((a, b) => a + b)) {
+                        dispatch({
+                            type: 'SET_PUZZLE_CONSTRUCTOR',
+                            payload: arr
+                        })
+                    } else {
+                        dispatchGetWord(dispatch)
+                    }
                 })
         })
         .catch(err => console.log(err));

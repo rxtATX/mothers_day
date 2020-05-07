@@ -61,7 +61,7 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
     };
 
     const handleClose = () => {
-        setOpen(false);
+        // setOpen(false);
         outsideClose();
     };
 

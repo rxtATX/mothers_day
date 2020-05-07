@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { colors } from '../utility/API';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import LettersMatrix from './LettersMatrix';
 import ConfigClues from './ConfigClues';
 import GuessDisplay from './GuessDisplay';
@@ -7,20 +9,37 @@ import SelectedLetters from './SelectedLetters';
 import { findWordGroups, dispatchGetWord } from '../utility/API';
 import { useGameplayContext } from '../utility/GlobalState';
 import Dialog from './UI/Dialog'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
+    text: {
+        textAlign: 'center',
+        color: 'white',
+        textShadow: `1px 1px 1px ${colors[1].base}`
+    },
+    color1: {
+        backgroundColor: colors[1].light
+    },
+    color2: {
+        backgroundColor: colors[3].light
+    },
+    color3: {
+        backgroundColor: colors[1].dark
+    },
+    color4: {
+        backgroundColor: colors[3].dark
+    },
+    linearRoot: {
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+        margin: '48vh 10vw auto'
+    },
     animate: {
-        animationName: 'pop',
-        animationIterationCount: 1,
-        animationTimingFunction: 'ease',
-        animationDuration: '1990ms'
+        animation: 'pop ease 2s'
     },
     plopAnimate: {
-        animationName: 'plop',
-        animationIterationCount: 1,
-        animationTimingFunction: 'ease',
-        animationDuration: '200ms',
-        animationDirection: 'reverse'
+        animation: 'plop 600ms ease reverse'
     }
 }))
 
@@ -38,7 +57,7 @@ function MainPage() {
 
         return () => {
             clearTimeout(gameWinTimer)
-            setGameWinTimer(null)
+            // setGameWinTimer(null)
         }
     }, []);
 
@@ -160,18 +179,28 @@ function MainPage() {
             <SelectedLetters
                 classesApplied={classes.plopAnimate}
             />
-            {show ?
-                <Dialog
-                    title="Congratulations!"
-                    show={show}
-                    outsideClose={outsideClose}
-                    buttonElement={<></>}
-                    textContent={"Game Win!!"}
-                />
-                : null}
+            <Dialog
+                title="Congratulations!"
+                show={show}
+                outsideClose={outsideClose}
+                buttonElement={<></>}
+                textContent={"Game Win!!"}
+            />
         </>);
     } else {
-        return "Loading..."
+        return <div className={classes.linearRoot}>
+            <Typography classes={{ root: classes.text }} variant="h4" gutterBottom>
+                Loading...
+        </Typography>
+            <LinearProgress classes={{
+                colorPrimary: classes.color1,
+                barColorPrimary: classes.color3
+            }} />
+            <LinearProgress classes={{
+                colorPrimary: classes.color2,
+                barColorPrimary: classes.color4
+            }} />
+        </div>
     }
 
 }

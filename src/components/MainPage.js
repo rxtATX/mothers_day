@@ -159,7 +159,8 @@ function MainPage() {
     }
 
     function outsideClose() {
-        setShow(false)
+        setShow(false);
+        dispatchGetWord(dispatch);
     }
 
     if (state.puzzle) {
@@ -190,8 +191,8 @@ function MainPage() {
     } else {
         return <div className={classes.linearRoot}>
             <Typography classes={{ root: classes.text }} variant="h4" gutterBottom>
-                Loading...
-        </Typography>
+                {"Loading..."}
+            </Typography>
             <LinearProgress classes={{
                 colorPrimary: classes.color1,
                 barColorPrimary: classes.color3

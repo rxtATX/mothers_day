@@ -39,7 +39,7 @@ export function getWord(letter, num) {
     for (let i = 0; i < num - 1; i++) {
         q += "?"
     }
-    return fetch(`https://api.datamuse.com/words?sp=${letter}${q}`)
+    return fetch(`https://cors-anywhere.herokuapp.com/https://api.datamuse.com/words?sp=${letter}${q}`)
 }
 
 function recursiveGetWord(data) {

@@ -99,7 +99,7 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
                         </Button>
                         </>
                         :
-                        <Button className={classes.button} onClick={() => { handleClose(); dispatchGetWord(dispatch) }}>
+                        <Button className={classes.button} onClick={() => { handleClose(); }}>
                             New Game
                         </Button>
                     }

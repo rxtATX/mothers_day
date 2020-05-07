@@ -3,7 +3,7 @@ import * as actions from './actions';
 import PuzzleMaker from "./classGame";
 
 const defaultState = {
-    hintPreference: false,
+    hintPreference: JSON.parse(localStorage.getItem("preference")) || false,
     currentGuess: [],
     finalizedWords: {},
     finalizedWordCount: 0,

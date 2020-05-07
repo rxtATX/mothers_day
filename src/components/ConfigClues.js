@@ -72,6 +72,7 @@ export default function ConfigClues({
   }
 
   function dispatchChange() {
+    localStorage.setItem("preference", checked)
     dispatch({ type: 'SET_HINT_PREFERENCE', payload: checked })
   }
 

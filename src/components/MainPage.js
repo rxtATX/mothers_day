@@ -49,11 +49,13 @@ function MainPage() {
     const [state, dispatch] = useGameplayContext();
     const [animate, setAnimate] = useState(false);
     const [show, setShow] = useState(false);
+    const [tryAgain, setTryAgain] = useState(false);
     const [gameWinTimer, setGameWinTimer] = useState(null);
 
     useEffect(() => {
         const randWordgroups = findWordGroups();
         setWordGroups(randWordgroups);
+        setTimeout(() => setTryAgain(true), 1500)
 
         return () => {
             clearTimeout(gameWinTimer)
@@ -124,6 +126,7 @@ function MainPage() {
                 type: 'CORRECT_MAP',
                 payload: correctMap
             })
+            setTryAgain(false)
         }
     }, [state.currentGuess, state.puzzle, dispatch, state.finalizedWords]);
 
@@ -159,8 +162,7 @@ function MainPage() {
     }
 
     function outsideClose() {
-        setShow(false);
-        dispatchGetWord(dispatch);
+        setShow(false)
     }
 
     if (state.puzzle) {
@@ -191,7 +193,7 @@ function MainPage() {
     } else {
         return <div className={classes.linearRoot}>
             <Typography classes={{ root: classes.text }} variant="h4" gutterBottom>
-                {"Loading..."}
+                Loading...
             </Typography>
             <LinearProgress classes={{
                 colorPrimary: classes.color1,
@@ -201,6 +203,10 @@ function MainPage() {
                 colorPrimary: classes.color2,
                 barColorPrimary: classes.color4
             }} />
+
+            {tryAgain ? <Typography onClick={() => dispatchGetWord(dispatch)} classes={{ root: classes.text }} variant="h6" gutterBottom>
+                Click here if nothing loads...
+            </Typography> : null}
         </div>
     }
 

@@ -61,7 +61,7 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
     };
 
     const handleClose = () => {
-        // setOpen(false);
+        setOpen(false);
         outsideClose();
     };
 
@@ -99,7 +99,7 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
                         </Button>
                         </>
                         :
-                        <Button className={classes.button} onClick={() => { handleClose(); }}>
+                        <Button className={classes.button} onClick={() => { handleClose(); dispatchGetWord(dispatch) }}>
                             New Game
                         </Button>
                     }

@@ -41,6 +41,36 @@ html {
   }
 }
 
+@keyframes plop {
+  0% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  12% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.12);}
+  24% {font-size:110%; transform: scale(1.12); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.3), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  36% {font-size:120%; transform: scale(1.17); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  48% {font-size:120%; transform: scale(1.18); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  60% {font-size:120%; transform: scale(1.18); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  72% {font-size:120%; transform: scale(1.19); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  84% {font-size:120%; transform: scale(1.2); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  100%   {font-size:120%; transform: scale(1.25); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.6), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.17);}
+}
+
+@keyframes pop {
+  0%     {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.12);}
+  6.66%  {font-size:110%; transform: scale(1.12); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.3), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  13.33% {font-size:120%; transform: scale(1.17); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  19.99% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  26.65% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.12);}
+  33.31% {font-size:110%; transform: scale(1.12); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.3), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  39.99% {font-size:120%; transform: scale(1.17); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  46.63% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  53.29% {font-size:100%; transform: scale(1); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.12);}
+  59.95% {font-size:110%; transform: scale(1.12); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.3), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.14);}
+  66.61% {font-size:120%; transform: scale(1.17); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  73.27% {font-size:120%; transform: scale(1.18); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  79.93% {font-size:120%; transform: scale(1.18); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  86.59% {font-size:120%; transform: scale(1.19); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  93.25% {font-size:120%; transform: scale(1.2); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.5), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.16);}
+  100%   {font-size:120%; transform: scale(1.25); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.6), 0px 4px 10px 0px rgba(0,0,0,0.16), 0px 1px 15px 0px rgba(0,0,0,0.17);}
+}
 
 @keyframes emphasize {
   0%     {text-shadow: 0px 0px 2px black; font-size: 1.2em; transform: scale(1.25); box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 4px 10px 0px rgba(0,0,0,0.14), 0px 1px 15px 0px rgba(0,0,0,0.12);}

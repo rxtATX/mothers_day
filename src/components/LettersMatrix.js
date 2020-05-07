@@ -63,7 +63,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
             setAnimate(true)
           }
         })
-      }, [])
+      }, [i])
 
       return (
         <>

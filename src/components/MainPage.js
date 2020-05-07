@@ -1,22 +1,66 @@
 import React, { useState, useEffect } from 'react';
+import { colors } from '../utility/API';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import LettersMatrix from './LettersMatrix';
 import ConfigClues from './ConfigClues';
 import GuessDisplay from './GuessDisplay';
 import SelectedLetters from './SelectedLetters';
 import { findWordGroups, dispatchGetWord } from '../utility/API';
 import { useGameplayContext } from '../utility/GlobalState';
-import Dialog from './UI/Dialog'
+import Dialog from './UI/Dialog';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+const useStyles = makeStyles((theme) => ({
+    text: {
+        textAlign: 'center',
+        color: 'white',
+        textShadow: `1px 1px 1px ${colors[1].base}`
+    },
+    color1: {
+        backgroundColor: colors[1].light
+    },
+    color2: {
+        backgroundColor: colors[3].light
+    },
+    color3: {
+        backgroundColor: colors[1].dark
+    },
+    color4: {
+        backgroundColor: colors[3].dark
+    },
+    linearRoot: {
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+        margin: '48vh 10vw auto'
+    },
+    animate: {
+        animation: 'pop ease 2s'
+    },
+    plopAnimate: {
+        animation: 'plop 600ms ease reverse'
+    }
+}))
 
 function MainPage() {
-
+    const classes = useStyles();
     const [wordGroups, setWordGroups] = useState([]);
     const [state, dispatch] = useGameplayContext();
     // const [lineCoords, setLineCoords] = useState([]);
+    const [animate, setAnimate] = useState(false);
     const [show, setShow] = useState(false);
+    const [timer, setTimer] = useState(null);
+    const [timer2, setTimer2] = useState(null);
 
     useEffect(() => {
         const randWordgroups = findWordGroups();
         setWordGroups(randWordgroups);
+
+        return () => {
+            clearTimeout(timer);
+            clearTimeout(timer2);
+        }
     }, []);
 
     useEffect(() => {
@@ -53,13 +97,18 @@ function MainPage() {
             let skippedArr = []
             for (let word in correctMap) {
                 if (correctMap[word].filter(el => el).length === word.length) {
-                    dispatch({
-                        type: 'FINALIZE_WORD',
-                        payload: word
-                    })
-                    dispatch({
-                        type: 'RESET_GUESSES'
-                    })
+                    setAnimate(true);
+                    setTimer(setTimeout(() => {
+                        dispatch({
+                            type: 'FINALIZE_WORD',
+                            payload: word,
+                        })
+                        dispatch({
+                            type: 'RESET_GUESSES',
+                        })
+                        setAnimate(false);
+                    }, 1980)
+                    )
                 }
                 if (!correctMap[word][state.currentGuess.length - 1]) {
                     skippedArr.push(word)
@@ -84,7 +133,7 @@ function MainPage() {
     useEffect(() => {
         if (state.puzzle) {
             if (Object.keys(state.finalizedWords).length === state.puzzle.words.length) {
-                setShow(true)
+                setTimer2(setTimeout(() => setShow(true), 1000))
             }
         }
     }, [state.finalizedWords, state.puzzle])
@@ -125,12 +174,12 @@ function MainPage() {
                     dispatchGetWord={() => dispatchGetWord(dispatch)}
                     dispatchGetHint={dispatchGetHint}
                 />
-                <GuessDisplay />
+                <GuessDisplay classAttr={animate} classesApplied={classes.animate} />
                 <LettersMatrix
                     letterPress={letterPress}
                     wordGroups={wordGroups}
                 />
-                <SelectedLetters />
+                <SelectedLetters classAttr={animate} classesApplied={classes.plopAnimate} />
                 {show ? <Dialog
                     title="Congratulations!"
                     show={show}
@@ -140,7 +189,19 @@ function MainPage() {
                 /> : null}
             </>);
     } else {
-        return "Loading..."
+        return <div className={classes.linearRoot}>
+            <Typography classes={{ root: classes.text }} variant="h4" gutterBottom>
+                Loading...
+        </Typography>
+            <LinearProgress classes={{
+                colorPrimary: classes.color1,
+                barColorPrimary: classes.color3
+            }} />
+            <LinearProgress classes={{
+                colorPrimary: classes.color2,
+                barColorPrimary: classes.color4
+            }} />
+        </div>
     }
 
 }

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-function GuessDisplay() {
+function GuessDisplay({ classesApplied, classAttr }) {
     const classes = useStyles();
     const [state] = useGameplayContext();
 
@@ -32,6 +32,7 @@ function GuessDisplay() {
 
     return (
         <Grid className={classes.root} container justify="center">
+            {console.log(classesApplied, classAttr)}
             {state.currentGuess.map(guess =>
                 <Grid item>
                     <Fab
@@ -39,13 +40,13 @@ function GuessDisplay() {
                         style={{
                             backgroundColor: getColor(guess.x, guess.y).base,
                             backgroundImage: `radial-gradient(
-                        rgba(255,255,255,.3), 
-                        ${getColor(guess.x, guess.y).light},
-                        ${getColor(guess.x, guess.y).base}, 
-                        ${getColor(guess.x, guess.y).dark}, 
-                        rgba(0,0,0,.7))`
+                            rgba(255,255,255,.3), 
+                            ${getColor(guess.x, guess.y).light},
+                            ${getColor(guess.x, guess.y).base}, 
+                            ${getColor(guess.x, guess.y).dark}, 
+                            rgba(0,0,0,.7))`
                         }}
-                        className={classes.fab}>
+                        className={classAttr ? `${classes.fab} ${classesApplied}` : classes.fab}>
                         {state.puzzle.puzzle[guess.x][guess.y]}
                     </Fab>
                 </Grid>)}

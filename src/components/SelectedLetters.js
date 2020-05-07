@@ -43,28 +43,34 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SelectedLetters() {
+export default function SelectedLetters({ classAttr, classesApplied }) {
   const classes = useStyles();
   const [state] = useGameplayContext();
 
   function determineRender(word) {
-    if (state.correctMap[word]) {
-      return state.correctMap[word].map((letter, i) => {
-        if (!letter) {
-          return (
-            <Grid key={i} item>
-              <Paper className={classes.hidden}>{""}</Paper>
-            </Grid>
-          )
-        } else {
-          return (
-            <Grid key={i} item>
-              <Paper className={classes.paper}>{word[i]}</Paper>
-            </Grid>
-          )
-        }
-      })
-    }
+    // console.log(word, state.finalizedWords)
+    // if (state.correctMap[word]) {
+    // return state.correctMap[word].map((letter, i) => {
+    // return state.puzzle.words.map((one) => {
+    return word.split("").map((letter, i) => {
+
+      if (state.finalizedWords[word]) {
+        // if (!letter) {
+        return (
+          <Grid key={i} item>
+            <Paper className={`${classesApplied} ${classes.paper}`}>{letter}</Paper>
+          </Grid>
+        )
+      } else {
+        return (
+          <Grid key={i} item>
+            <Paper className={classes.hidden}>{""}</Paper>
+          </Grid>
+        )
+      }
+    })
+    // })
+    // }
   }
 
   return (

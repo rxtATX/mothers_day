@@ -6,6 +6,7 @@ const defaultState = {
     hintPreference: false,
     currentGuess: [],
     finalizedWords: {},
+    finalizedWordCount: 0,
     correctMap: {}
 }
 
@@ -59,7 +60,8 @@ function reducer(state = defaultState, action) {
                 finalizedWords: {
                     ...state.finalizedWords,
                     [action.payload]: true
-                }
+                },
+                finalizedWordCount: state.finalizedWordCount + 1
             }
         case 'GET_HINT':
             return {

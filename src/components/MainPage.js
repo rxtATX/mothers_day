@@ -13,8 +13,14 @@ const useStyles = makeStyles((theme) => ({
         animationName: 'pop',
         animationIterationCount: 1,
         animationTimingFunction: 'ease',
-        // animationDuration: '9s'
         animationDuration: '1990ms'
+    },
+    plopAnimate: {
+        animationName: 'plop',
+        animationIterationCount: 1,
+        animationTimingFunction: 'ease',
+        animationDuration: '200ms',
+        animationDirection: 'reverse'
     }
 }))
 
@@ -22,7 +28,6 @@ function MainPage() {
     const classes = useStyles();
     const [wordGroups, setWordGroups] = useState([]);
     const [state, dispatch] = useGameplayContext();
-    // const [lineCoords, setLineCoords] = useState([]);
     const [animate, setAnimate] = useState(false);
     const [show, setShow] = useState(false);
     const [gameWinTimer, setGameWinTimer] = useState(null);
@@ -82,7 +87,6 @@ function MainPage() {
                         })
                         setAnimate(false);
                     }, 2000)
-                    // }, 10000)
                 }
                 if (!correctMap[word][state.currentGuess.length - 1]) {
                     skippedArr.push(word)
@@ -127,16 +131,10 @@ function MainPage() {
     }
 
     function letterPress(row, i) {
-        // let { top, left, width, height } = e.target.getBoundingClientRect()
-        // setLineCoords([...lineCoords, { x: top - (height / 2), y: left - (width / 2) }])
-
-        let x = row - 1;
-        let y = i;
-
         dispatch({
             type: 'LETTER_PRESS',
             payload: {
-                x, y
+                x: row - 1, y: i
             }
         })
     }
@@ -146,26 +144,32 @@ function MainPage() {
     }
 
     if (state.puzzle) {
-        return (
-            <>
-                <ConfigClues
-                    dispatchGetWord={() => dispatchGetWord(dispatch)}
-                    dispatchGetHint={dispatchGetHint}
-                />
-                <GuessDisplay classAttr={animate} classesApplied={classes.animate} />
-                <LettersMatrix
-                    letterPress={letterPress}
-                    wordGroups={wordGroups}
-                />
-                <SelectedLetters />
-                {show ? <Dialog
+        return (<>
+            <ConfigClues
+                dispatchGetWord={() => dispatchGetWord(dispatch)}
+                dispatchGetHint={dispatchGetHint}
+            />
+            <GuessDisplay
+                classAttr={animate}
+                classesApplied={classes.animate}
+            />
+            <LettersMatrix
+                letterPress={letterPress}
+                wordGroups={wordGroups}
+            />
+            <SelectedLetters
+                classesApplied={classes.plopAnimate}
+            />
+            {show ?
+                <Dialog
                     title="Congratulations!"
                     show={show}
                     outsideClose={outsideClose}
                     buttonElement={<></>}
                     textContent={"Game Win!!"}
-                /> : null}
-            </>);
+                />
+                : null}
+        </>);
     } else {
         return "Loading..."
     }

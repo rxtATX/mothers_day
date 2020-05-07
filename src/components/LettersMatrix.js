@@ -31,14 +31,6 @@ const useStyles = makeStyles((theme) => ({
   },
   activated: {
     backgroundColor: theme.palette.secondary
-  },
-  animate: {
-    visibility: 'hidden'
-    // animationName: 'emphasize',
-    // animationDuration: '8s',
-    // animationTimingFunction: 'ease',
-    // animationIterationCount: 'infinite',
-    // boxShadow: '1px 1px 1px rgba(0, 0, 0, .3)',
   }
 }));
 
@@ -70,12 +62,10 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
           {letter ? <Fab
             style={{ backgroundColor: base, backgroundImage: `radial-gradient(rgba(255,255,255,.3), ${light}, ${base}, ${dark}, rgba(0,0,0,.7))` }}
             onClick={conceal}
-            className={!animate ? classes.fab : `${classes.fab} ${classes.animate}`}>
+            className={!animate ? classes.fab : `${classes.fab} ${classes.hidden}`}>
             {letter}
-          </Fab> : <Fab
-            className={classes.hidden}>
-              {/* {letter} */}
-            </Fab>
+          </Fab>
+            : <Fab className={classes.hidden}>{""}</Fab>
           }
         </>
       )

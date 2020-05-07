@@ -74,7 +74,7 @@ export default function LettersMatrix({ letterPress, wordGroups }) {
             {letter}
           </Fab> : <Fab
             className={classes.hidden}>
-              {letter}
+              {/* {letter} */}
             </Fab>
           }
         </>

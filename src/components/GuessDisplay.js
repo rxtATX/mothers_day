@@ -32,9 +32,8 @@ function GuessDisplay({ classesApplied, classAttr }) {
 
     return (
         <Grid className={classes.root} container justify="center">
-            {console.log(classesApplied, classAttr)}
-            {state.currentGuess.map(guess =>
-                <Grid item>
+            {state.currentGuess.map((guess, i) =>
+                <Grid key={i} item>
                     <Fab
                         size="small"
                         style={{

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ad9dce3d8427bb41ecf27313525adcea",
+    "revision": "bdb323dfe8556fbc36e84ed4bbb34348",
     "url": "/mothers_day/index.html"
   },
   {
-    "revision": "1f9bb17fb3c1920f16cb",
+    "revision": "0fb83f287963e85862e6",
     "url": "/mothers_day/static/css/main.dc9d6ba0.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mothers_day/static/js/2.3f6d120a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1f9bb17fb3c1920f16cb",
-    "url": "/mothers_day/static/js/main.054a8b6d.chunk.js"
+    "revision": "0fb83f287963e85862e6",
+    "url": "/mothers_day/static/js/main.679b7207.chunk.js"
   },
   {
     "revision": "737b29dac6006121488b",

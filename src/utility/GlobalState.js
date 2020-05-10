@@ -6,8 +6,8 @@ const defaultState = {
     hintPreference: JSON.parse(localStorage.getItem("preference")) || false,
     currentGuess: [],
     finalizedWords: {},
-    finalizedWordCount: 0,
-    correctMap: {}
+    correctMap: {},
+    currentWordProgress: ""
 }
 
 const GameplayContext = createContext({
@@ -32,12 +32,12 @@ function reducer(state = defaultState, action) {
                 ...defaultState,
                 puzzle,
             }
-        case 'SET_HINT_PREFERENCE':
+        case actions.SET_HINT_PREFERENCE:
             return {
                 ...state,
                 hintPreference: action.payload
             }
-        case "LETTER_PRESS":
+        case actions.LETTER_PRESS:
             return {
                 ...state,
                 currentGuess: [
@@ -45,12 +45,17 @@ function reducer(state = defaultState, action) {
                     action.payload
                 ]
             }
-        case "RESET_GUESSES":
+        case actions.RESET_GUESSES:
             return {
                 ...state,
                 currentGuess: []
             }
-        case 'FINALIZE_WORD':
+        case actions.CURRENT_WORD_PROGRESS:
+            return {
+                ...state,
+                currentWordProgress: action.payload
+            }
+        case actions.FINALIZE_WORD:
             let finalizedWordPath = state.puzzle.wordPath[action.payload]
             if (finalizedWordPath) finalizedWordPath.forEach(coord => {
                 state.puzzle.puzzle[coord.x][coord.y] = false
@@ -59,16 +64,11 @@ function reducer(state = defaultState, action) {
                 ...state,
                 finalizedWords: {
                     ...state.finalizedWords,
-                    [action.payload]: true
+                    [action.payload]: true,
                 },
-                finalizedWordCount: state.finalizedWordCount + 1
+                currentWordProgress: ''
             }
-        case 'GET_HINT':
-            return {
-                ...state,
-                hintLetters: []
-            }
-        case 'CORRECT_MAP':
+        case actions.CORRECT_MAP:
             return {
                 ...state,
                 correctMap: action.payload

@@ -8,6 +8,7 @@ import Dialog from './UI/Dialog';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useGameplayContext } from '../utility/GlobalState';
+import * as actions from '../utility/actions';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -73,7 +74,7 @@ export default function ConfigClues({
 
   function dispatchChange() {
     localStorage.setItem("preference", checked)
-    dispatch({ type: 'SET_HINT_PREFERENCE', payload: checked })
+    dispatch({ type: actions.SET_HINT_PREFERENCE, payload: checked })
   }
 
   return (

@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/mothers_day/static/css/main.dc9d6ba0.chunk.css",
-    "main.js": "/mothers_day/static/js/main.679b7207.chunk.js",
-    "main.js.map": "/mothers_day/static/js/main.679b7207.chunk.js.map",
+    "main.js": "/mothers_day/static/js/main.577307e2.chunk.js",
+    "main.js.map": "/mothers_day/static/js/main.577307e2.chunk.js.map",
     "runtime-main.js": "/mothers_day/static/js/runtime-main.fdd59fbc.js",
     "runtime-main.js.map": "/mothers_day/static/js/runtime-main.fdd59fbc.js.map",
-    "static/js/2.3f6d120a.chunk.js": "/mothers_day/static/js/2.3f6d120a.chunk.js",
-    "static/js/2.3f6d120a.chunk.js.map": "/mothers_day/static/js/2.3f6d120a.chunk.js.map",
+    "static/js/2.4a010ddc.chunk.js": "/mothers_day/static/js/2.4a010ddc.chunk.js",
+    "static/js/2.4a010ddc.chunk.js.map": "/mothers_day/static/js/2.4a010ddc.chunk.js.map",
     "index.html": "/mothers_day/index.html",
-    "precache-manifest.c7b07c6fcdbf0be94d1d5ff56d403a42.js": "/mothers_day/precache-manifest.c7b07c6fcdbf0be94d1d5ff56d403a42.js",
+    "precache-manifest.92721e6649921aa6e9468f2dbe4d6d26.js": "/mothers_day/precache-manifest.92721e6649921aa6e9468f2dbe4d6d26.js",
     "service-worker.js": "/mothers_day/service-worker.js",
     "static/css/main.dc9d6ba0.chunk.css.map": "/mothers_day/static/css/main.dc9d6ba0.chunk.css.map",
-    "static/js/2.3f6d120a.chunk.js.LICENSE.txt": "/mothers_day/static/js/2.3f6d120a.chunk.js.LICENSE.txt"
+    "static/js/2.4a010ddc.chunk.js.LICENSE.txt": "/mothers_day/static/js/2.4a010ddc.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.fdd59fbc.js",
-    "static/js/2.3f6d120a.chunk.js",
+    "static/js/2.4a010ddc.chunk.js",
     "static/css/main.dc9d6ba0.chunk.css",
-    "static/js/main.679b7207.chunk.js"
+    "static/js/main.577307e2.chunk.js"
   ]
 }

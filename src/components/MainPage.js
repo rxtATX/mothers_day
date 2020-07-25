@@ -10,6 +10,7 @@ import { findWordGroups, dispatchGetWord } from '../utility/API';
 import { useGameplayContext } from '../utility/GlobalState';
 import Dialog from './UI/Dialog'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import * as actions from '../utility/actions';
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -86,6 +87,10 @@ function MainPage() {
                                 correctMap[word][i] = state.puzzle.wordPath[word][i]
                             }
                         } else {
+                            dispatch({
+                                type: actions.CURRENT_WORD_PROGRESS,
+                                payload: word
+                            })
                             correctMap[word][i] = state.puzzle.wordPath[word][i]
                         }
                     } else {
@@ -100,14 +105,15 @@ function MainPage() {
                     setAnimate(true);
                     setTimeout(() => {
                         dispatch({
-                            type: 'FINALIZE_WORD',
+                            type: actions.FINALIZE_WORD,
                             payload: word
                         })
                         dispatch({
-                            type: 'RESET_GUESSES'
+                            type: actions.RESET_GUESSES
                         })
                         setAnimate(false);
-                    }, 2000)
+                        determineWin()
+                    }, 1200)
                 }
                 if (!correctMap[word][state.currentGuess.length - 1]) {
                     skippedArr.push(word)
@@ -118,43 +124,56 @@ function MainPage() {
             }
             if (skippedArr.length === state.puzzle.words.length && state.currentGuess.length) {
                 dispatch({
-                    type: 'RESET_GUESSES'
+                    type: actions.RESET_GUESSES
+                })
+                dispatch({
+                    type: actions.CURRENT_WORD_PROGRESS,
+                    payload: ""
                 })
             }
 
             dispatch({
-                type: 'CORRECT_MAP',
+                type: actions.CORRECT_MAP,
                 payload: correctMap
             })
             setTryAgain(false)
         }
     }, [state.currentGuess, state.puzzle, dispatch, state.finalizedWords]);
 
-    useEffect(() => {
+    function determineWin() {
         if (state.puzzle) {
             if (Object.keys(state.finalizedWords).length === state.puzzle.words.length) {
-                setGameWinTimer(
-                    setTimeout(() => {
-                        setShow(true)
-                    }, 800)
-                )
+                setShow(true)
             }
         }
-    }, [state.finalizedWords, state.puzzle])
+    }
 
     function dispatchGetHint() {
-        for (let key in state.correctMap) {
-            if (state.correctMap[key].filter(el => !el).length > 0) {
-                let openIndex = state.correctMap[key].indexOf(false);
-                let { x, y } = state.puzzle.wordPath[key][openIndex]
-                return letterPress(x + 1, y)
+        if (!state.currentWordProgress.length) {
+            for (let key in state.correctMap) {
+                if (state.correctMap[key].filter(el => !el).length > 0) {
+                    return mockLetterPress(key)
+                }
             }
+        } else {
+            mockLetterPress(state.currentWordProgress)
+        }
+    }
+
+    function mockLetterPress(key) {
+        let openIndex = state.correctMap[key].indexOf(false);
+        let index = state.puzzle.wordPath[key][openIndex];
+        if (index) {
+            let { x, y } = state.puzzle.wordPath[key][openIndex]
+            return letterPress(x + 1, y)
+        } else {
+            return
         }
     }
 
     function letterPress(row, i) {
         dispatch({
-            type: 'LETTER_PRESS',
+            type: actions.LETTER_PRESS,
             payload: {
                 x: row - 1, y: i
             }

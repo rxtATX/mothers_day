@@ -93,10 +93,10 @@ export default function DialogEl({ title, buttonElement, textContent, children, 
                         <>
                             <Button onClick={handleClose} className={classes.button} >
                                 No!
-                        </Button>
+                            </Button>
                             <Button className={classes.button} onClick={() => { handleClose(); accept() }} >
                                 Yes!
-                        </Button>
+                            </Button>
                         </>
                         :
                         <Button className={classes.button} onClick={() => { handleClose(); dispatchGetWord(dispatch) }}>

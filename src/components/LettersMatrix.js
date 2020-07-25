@@ -8,6 +8,7 @@ import { useGameplayContext } from '../utility/GlobalState';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    minWidth: '310px'
   },
   fab: {
     textAlign: 'center',

@@ -1,3 +1,4 @@
+import * as actions from './actions';
 const alpha = "qwertyuiopasdfghjklzxcvbnm";
 const twoDArray = [
     [4, 4, 4, 4],
@@ -73,7 +74,7 @@ export function dispatchGetWord(dispatch) {
                     let arr = [first, second, third, fourth].filter(el => el)
                     if (arr.length === wordGroups.length && arr.join("").length === wordGroups.reduce((a, b) => a + b)) {
                         dispatch({
-                            type: 'SET_PUZZLE_CONSTRUCTOR',
+                            type: actions.SET_PUZZLE_CONSTRUCTOR,
                             payload: arr
                         })
                     } else {

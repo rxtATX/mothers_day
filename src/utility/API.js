@@ -1,6 +1,7 @@
 import * as actions from './actions';
 const alpha = "qwertyuiopasdfghjklzxcvbnm";
 const twoDArray = [
+    [9],
     [4, 4, 4, 4],
     [5, 6, 5],
     [5, 4]
@@ -63,8 +64,10 @@ export function dispatchGetWord(dispatch) {
             Promise.all(res)
                 .then(data => {
                     let first = recursiveGetWord(data[0])
-                    let second = recursiveGetWord(data[1])
-                    let third, fourth;
+                    let second, third, fourth;
+                    if (data[1]) {
+                        second = recursiveGetWord(data[1])
+                    }
                     if (data[2]) {
                         third = recursiveGetWord(data[2])
                     }

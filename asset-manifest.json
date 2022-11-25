@@ -1,22 +1,13 @@
 {
   "files": {
-    "main.css": "/mothers_day/static/css/main.dc9d6ba0.chunk.css",
-    "main.js": "/mothers_day/static/js/main.5f410155.chunk.js",
-    "main.js.map": "/mothers_day/static/js/main.5f410155.chunk.js.map",
-    "runtime-main.js": "/mothers_day/static/js/runtime-main.fdd59fbc.js",
-    "runtime-main.js.map": "/mothers_day/static/js/runtime-main.fdd59fbc.js.map",
-    "static/js/2.4a010ddc.chunk.js": "/mothers_day/static/js/2.4a010ddc.chunk.js",
-    "static/js/2.4a010ddc.chunk.js.map": "/mothers_day/static/js/2.4a010ddc.chunk.js.map",
+    "main.css": "/mothers_day/static/css/main.f591cdab.css",
+    "main.js": "/mothers_day/static/js/main.9df289d4.js",
     "index.html": "/mothers_day/index.html",
-    "precache-manifest.5572e2ecfdb0dcc24a8f8f53ec5e3a01.js": "/mothers_day/precache-manifest.5572e2ecfdb0dcc24a8f8f53ec5e3a01.js",
-    "service-worker.js": "/mothers_day/service-worker.js",
-    "static/css/main.dc9d6ba0.chunk.css.map": "/mothers_day/static/css/main.dc9d6ba0.chunk.css.map",
-    "static/js/2.4a010ddc.chunk.js.LICENSE.txt": "/mothers_day/static/js/2.4a010ddc.chunk.js.LICENSE.txt"
+    "main.f591cdab.css.map": "/mothers_day/static/css/main.f591cdab.css.map",
+    "main.9df289d4.js.map": "/mothers_day/static/js/main.9df289d4.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.fdd59fbc.js",
-    "static/js/2.4a010ddc.chunk.js",
-    "static/css/main.dc9d6ba0.chunk.css",
-    "static/js/main.5f410155.chunk.js"
+    "static/css/main.f591cdab.css",
+    "static/js/main.9df289d4.js"
   ]
 }
